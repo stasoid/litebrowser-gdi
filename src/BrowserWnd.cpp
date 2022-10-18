@@ -1,7 +1,9 @@
 #include "globals.h"
 #include "BrowserWnd.h"
 #include "HtmlViewWnd.h"
-#include "ToolbarWnd.h"
+#ifndef NO_TOOLBAR
+	#include "ToolbarWnd.h"
+#endif
 
 CBrowserWnd::CBrowserWnd(HINSTANCE hInst)
 {

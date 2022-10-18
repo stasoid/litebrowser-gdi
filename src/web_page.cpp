@@ -2,7 +2,6 @@
 #include "web_page.h"
 #include "HtmlViewWnd.h"
 
-
 web_page::web_page(CHTMLViewWnd* parent)
 {
 	m_refCount		= 1;
@@ -17,39 +16,18 @@ web_page::~web_page()
 
 void web_page::set_caption( const litehtml::tchar_t* caption )
 {
-#ifndef LITEHTML_UTF8
-	m_caption = caption;
-#else
-	LPWSTR captionW = cairo_font::utf8_to_wchar(caption);
-	m_caption = captionW;
-	delete captionW;
-#endif
+	m_caption = litehtml_to_wchar(caption);
 }
 
 void web_page::set_base_url( const litehtml::tchar_t* base_url )
 {
-#ifndef LITEHTML_UTF8
 	if(base_url)
 	{
-		if(PathIsRelative(base_url) && !PathIsURL(base_url))
+		std::wstring bu = litehtml_to_wchar(base_url);
+		
+		if(PathIsRelative(bu.c_str()) && !PathIsURL(bu.c_str()))
 		{
-			make_url(base_url, m_url.c_str(), m_base_path);
-		} else
-		{
-			m_base_path = base_url;
-		}
-	} else
-	{
-		m_base_path = m_url;
-	}
-#else
-	LPWSTR bu = cairo_font::utf8_to_wchar(base_url);
-
-	if(bu)
-	{
-		if(PathIsRelative(bu) && !PathIsURL(bu))
-		{
-			make_url(bu, m_url.c_str(), m_base_path);
+			make_url(bu.c_str(), m_url.c_str(), m_base_path);
 		} else
 		{
 			m_base_path = bu;
@@ -58,7 +36,6 @@ void web_page::set_base_url( const litehtml::tchar_t* base_url )
 	{
 		m_base_path = m_url;
 	}
-#endif
 }
 
 void web_page::make_url( LPCWSTR url, LPCWSTR basepath, std::wstring& out )
@@ -160,11 +137,9 @@ void web_page::import_css( litehtml::tstring& text, const litehtml::tstring& url
 		LPSTR css = load_utf8_file(m_waited_file.c_str(), false, L"UTF-8");
 		if(css)
 		{
-			LPSTR css_urlA = cairo_font::wchar_to_utf8(css_url.c_str());
-			baseurl = css_urlA;
+			baseurl = litehtml::wchar_to_utf8(css_url);
 			text = css;
 			delete css;
-			delete css_urlA;
 		}
 #endif
 	}
@@ -179,21 +154,12 @@ void web_page::on_anchor_click( const litehtml::tchar_t* url, const litehtml::el
 
 void web_page::set_cursor( const litehtml::tchar_t* cursor )
 {
-#ifndef LITEHTML_UTF8
-	m_cursor = cursor;
-#else
-	LPWSTR v = cairo_font::utf8_to_wchar(cursor);
-	if(v)
-	{
-		m_cursor = v;
-		delete v;
-	}
-#endif
+	m_cursor = litehtml_to_wchar(cursor);
 }
 
-cairo_container::image_ptr web_page::get_image(LPCWSTR url, bool redraw_on_ready)
+// see also web_page::on_image_loaded
+uint_ptr web_page::get_image(LPCWSTR url, bool redraw_on_ready)
 {
-	cairo_container::image_ptr img;
 	if(PathIsURL(url))
 	{
 		if(redraw_on_ready)
@@ -205,13 +171,18 @@ cairo_container::image_ptr web_page::get_image(LPCWSTR url, bool redraw_on_ready
 		}
 	} else
 	{
-		img = cairo_container::image_ptr(new CTxDIB);
-		if(!img->load(url))
+		auto img = new Gdiplus::Bitmap(url);
+		if (img->GetLastStatus() == Gdiplus::Ok)
 		{
-			img = nullptr;
+			return (uint_ptr)img;
+		}
+		else
+		{
+			delete img;
+			return 0;
 		}
 	}
-	return img;
+	return 0;
 }
 
 void web_page::load( LPCWSTR url )
@@ -229,17 +200,14 @@ void web_page::load( LPCWSTR url )
 
 void web_page::on_document_loaded(LPCWSTR file, LPCWSTR encoding, LPCWSTR realUrl)
 {
-	if (realUrl)
-	{
-		m_url = realUrl;
-	}
+	if (realUrl) m_url = realUrl;
 
 	char* html_text = load_utf8_file(file, true, L"UTF-8", encoding);
 
 	if(!html_text)
 	{
 		LPCSTR txt = "<h1>Something Wrong</h1>";
-		html_text = new char[lstrlenA(txt) + 1];
+		html_text = new char[strlen(txt) + 1];
 		lstrcpyA(html_text, txt);
 	}
 
@@ -271,13 +239,12 @@ void web_page::on_document_error(DWORD dwError, LPCWSTR errMsg)
 	std::string txt = "<h1>Something Wrong</h1>";
 	if(errMsg)
 	{
-		LPSTR errMsg_utf8 = cairo_font::wchar_to_utf8(errMsg);
+		std::string errMsg_utf8 = litehtml::wchar_to_utf8(errMsg);
 		txt += "<p>";
 		txt += errMsg_utf8;
 		txt += "</p>";
-		delete errMsg_utf8;
 	}
-	m_doc = litehtml::document::createFromUTF8((const char*)txt.c_str(), this, m_parent->get_html_context());
+	m_doc = litehtml::document::createFromUTF8(txt.c_str(), this, m_parent->get_html_context());
 #else
 	std::wstring txt = L"<h1>Something Wrong</h1>";
 	if (errMsg)
@@ -292,16 +259,21 @@ void web_page::on_document_error(DWORD dwError, LPCWSTR errMsg)
 	PostMessage(m_parent->wnd(), WM_PAGE_LOADED, 0, 0);
 }
 
+// see also web_page::get_image
 void web_page::on_image_loaded( LPCWSTR file, LPCWSTR url, bool redraw_only )
 {
-	cairo_container::image_ptr img = cairo_container::image_ptr(new CTxDIB);
-	if(img->load(file))
+	auto img = new Gdiplus::Bitmap(file);
+	if (img->GetLastStatus() == Gdiplus::Ok)
 	{
-		cairo_container::add_image(std::wstring(url), img);
-		if(m_doc)
+		add_image(url, (uint_ptr)img);
+		if (m_doc)
 		{
-			PostMessage(m_parent->wnd(), WM_IMAGE_LOADED, (WPARAM) (redraw_only ? 1 : 0), 0);
+			PostMessage(m_parent->wnd(), WM_IMAGE_LOADED, (WPARAM)(redraw_only ? 1 : 0), 0);
 		}
+	}
+	else
+	{
+		delete img;
 	}
 }
 
@@ -394,6 +366,11 @@ char* web_page::load_utf8_file(LPCWSTR path, bool is_html, LPCWSTR defEncoding, 
 				ReadFile(fl, ret + 3, size - 3, &cbRead, NULL);
 				ret[cbRead + 3] = 0;
 			}
+		}
+		else
+		{
+			ReadFile(fl, ret, size, &cbRead, NULL);
+			ret[cbRead] = 0;
 		}
 		CloseHandle(fl);
 	}

@@ -45,7 +45,7 @@ public:
 
 	void				render(BOOL calc_time = FALSE, BOOL do_redraw = TRUE, int calc_repeat = 1);
 	void				get_client_rect(litehtml::position& client) const;
-	void				show_hash(std::wstring& hash);
+	void				show_hash(const std::wstring& hash);
 	void				update_history();
 	void				calc_draw(int calc_repeat = 1);
 

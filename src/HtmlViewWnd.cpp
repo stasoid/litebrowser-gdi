@@ -163,7 +163,22 @@ void CHTMLViewWnd::OnCreate()
 
 void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 {
-	cairo_surface_t* surface = cairo_image_surface_create_for_data((unsigned char*) dib->bits(), CAIRO_FORMAT_ARGB32, dib->width(), dib->height(), dib->width() * 4);
+	HDC hdc = *dib;
+	FillRect(hdc, rcDraw, (HBRUSH)GetStockObject(WHITE_BRUSH));
+
+	lock();
+
+	if (web_page* page = get_page(false))
+	{
+		litehtml::position clip(rcDraw->left, rcDraw->top, rcDraw->right - rcDraw->left, rcDraw->bottom - rcDraw->top);
+		page->m_doc->draw((litehtml::uint_ptr)hdc, -m_left, -m_top, &clip);
+
+		page->release();
+	}
+
+	unlock();
+	
+/*	cairo_surface_t* surface = cairo_image_surface_create_for_data((unsigned char*) dib->bits(), CAIRO_FORMAT_ARGB32, dib->width(), dib->height(), dib->width() * 4);
 	cairo_t* cr = cairo_create(surface);
 
 	cairo_rectangle(cr, rcDraw->left, rcDraw->top, rcDraw->right - rcDraw->left, rcDraw->bottom - rcDraw->top);
@@ -188,7 +203,7 @@ void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 	unlock();
 
 	cairo_destroy(cr);
-	cairo_surface_destroy(surface);
+	cairo_surface_destroy(surface);*/
 }
 
 void CHTMLViewWnd::OnSize( int width, int height )
@@ -828,28 +843,19 @@ void CHTMLViewWnd::OnPageReady()
 	}
 }
 
-void CHTMLViewWnd::show_hash(std::wstring& hash)
+void CHTMLViewWnd::show_hash(const std::wstring& hash)
 {
 	web_page* page = get_page();
 	if(page)
 	{
 		if(!hash.empty())
 		{
-			litehtml::tchar_t selector[255];
-#ifndef LITEHTML_UTF8
-			StringCchPrintf(selector, 255, L"#%s", hash.c_str());
-#else
-			LPSTR hashA = cairo_font::wchar_to_utf8(hash.c_str());
-			StringCchPrintfA(selector, 255, "#%s", hashA);
-#endif
+			litehtml::tstring t_hash = litehtml_from_wchar(hash);
+			litehtml::tstring selector = _t("#") + t_hash;
 			element::ptr el = page->m_doc->root()->select_one(selector);
 			if(!el)
 			{
-#ifndef LITEHTML_UTF8
-				StringCchPrintf(selector, 255, L"[name=%s]", hash.c_str());
-#else
-				StringCchPrintfA(selector, 255, "[name=%s]", hashA);
-#endif
+				selector = _t("[name=") + t_hash + _t("]");
 				el = page->m_doc->root()->select_one(selector);
 			}
 			if(el)
@@ -857,17 +863,11 @@ void CHTMLViewWnd::show_hash(std::wstring& hash)
 				litehtml::position pos = el->get_placement();
 				m_top = pos.y;
 			}
-#ifdef LITEHTML_UTF8
-			delete hashA;
-#endif
 		} else
 		{
 			m_top = 0;
 		}
-		if(page->m_hash != hash)
-		{
-			page->m_hash = hash;
-		}
+		page->m_hash = hash;
 		page->release();
 	}
 }

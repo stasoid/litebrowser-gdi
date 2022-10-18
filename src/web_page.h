@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../containers/cairo/cairo_container.h"
-#include "../containers/cairo/cairo_font.h"
+#include "../containers/gdiplus/gdiplus_container.h"
 #include "tordexhttp.h"
 
 class CHTMLViewWnd;
 
-class web_page :	public cairo_container
+class web_page : public gdiplus_container
 {
 	CHTMLViewWnd*				m_parent;
 	LONG						m_refCount;
@@ -42,8 +41,8 @@ public:
 	virtual	void		on_anchor_click(const litehtml::tchar_t* url, const litehtml::element::ptr& el);
 	virtual	void		set_cursor(const litehtml::tchar_t* cursor);
 
-	virtual void		make_url(LPCWSTR url, LPCWSTR basepath, std::wstring& out);
-	virtual cairo_container::image_ptr	get_image(LPCWSTR url, bool redraw_on_ready);
+	virtual	void		make_url(LPCWSTR url, LPCWSTR basepath, std::wstring& out);
+	virtual uint_ptr	get_image(LPCWSTR url, bool redraw_on_ready);
 	virtual void		get_client_rect(litehtml::position& client)  const;
 private:
 	LPWSTR	load_text_file(LPCWSTR path, bool is_html, LPCWSTR defEncoding = L"UTF-8", LPCWSTR forceEncoding = NULL);

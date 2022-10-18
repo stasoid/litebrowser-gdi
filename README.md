@@ -1,30 +1,17 @@
-## litebrowser (litehtml engine)
+## litebrowser-gdi
 
-**Litebrowser** is simple web browser designed to test the [litehtml HTML rendering engine](https://github.com/tordex/litehtml).
+This is a fork of [litebrowser](https://github.com/litehtml/litebrowser), it uses win32_container/gdiplus_container
+instead of cairo_container.
 
-### Building
+Advantages:
+* a bit faster (?)
+* less dependencies (depends only on litehtml)
 
-You can build litebrowser with Vinsual Studio 2008 and newer. **Note**: this project contais some git submodules:
+Disadvanatges:
+* addressbar is disabled
+* doesn't support alpha channel in background colors, borders and text (because those are handled by GDI)
+* no rounded corners
+* transcription on Obama wiki is displayed with gaps
+* underline is broken under hoo-SAYN on Obama wiki
+* things become invisible during scroll, especially one-step scroll (when pushing the ^v buttons)
 
-  * [freeimage](https://github.com/tordex/freeimage) - used to draw images
-  * [cairo](https://github.com/tordex/cairo) - 2D graphics library
-  * [txdib](https://github.com/tordex/txdib) - wrapper for freeimage
-  * [simpledib](https://github.com/tordex/simpledib) - library for memory device context and DIBs
-  * [litehtml](https://github.com/tordex/litehtml) - html rendering engine
-
-Please be sure the submodules are fetched, or download them from github and copy into libs subfolder.
-
-### Download binaries
-
-You can download the binary files from [litehtml.com](http://www.litehtml.com).
-
-### Using litebrowser
-
-Before running litebrowser copy the files cairo.dll (from libs\cairo) and freeimage.dll (libs\freeimage) into the same folder where litebrowser.exe is.
-
-Currently the address bar of the litebrowser is *fake*. Run litebrowser with command line parameter:
-```
-litebrowser.exe http://www.litehtml.com
-```
-
-If you run litebrowser without parameter, the dmoz.org will be opened.

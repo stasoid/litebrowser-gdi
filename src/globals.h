@@ -6,6 +6,7 @@
 
 #include "targetver.h"
 #include <windows.h>
+#include <mlang.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
@@ -17,18 +18,7 @@
 #include <winhttp.h>
 #include <algorithm>
 
-// include TxDIB project
-#include <TxDIB.h>
-#pragma comment(lib, "txdib.lib")
-
-// include CAIRO project
-#include <cairo.h>
-#include <cairo-win32.h>
-#pragma comment(lib, "cairo.lib")
-
-// include SIMPLEDIB project
-#include <dib.h>
-#pragma comment(lib, "simpledib.lib")
+#include "dib.h"  // simpledib
 
 #pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "Msimg32.lib")
