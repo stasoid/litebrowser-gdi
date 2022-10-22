@@ -850,12 +850,12 @@ void CHTMLViewWnd::show_hash(const std::wstring& hash)
 	{
 		if(!hash.empty())
 		{
-			litehtml::tstring t_hash = litehtml_from_wchar(hash);
-			litehtml::tstring selector = _t("#") + t_hash;
+			litehtml::string t_hash = litehtml_from_wchar(hash);
+			litehtml::string selector = "#" + t_hash;
 			element::ptr el = page->m_doc->root()->select_one(selector);
 			if(!el)
 			{
-				selector = _t("[name=") + t_hash + _t("]");
+				selector = "[name=" + t_hash + "]";
 				el = page->m_doc->root()->select_one(selector);
 			}
 			if(el)

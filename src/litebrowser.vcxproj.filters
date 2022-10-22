@@ -45,10 +45,10 @@
     <ClCompile Include="sl_edit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\libs\litehtml\containers\win32\win32_container.cpp">
+    <ClCompile Include="..\litehtml\containers\win32\win32_container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\libs\litehtml\containers\gdiplus\gdiplus_container.cpp">
+    <ClCompile Include="..\litehtml\containers\gdiplus\gdiplus_container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dib.cpp">
