@@ -4,12 +4,11 @@ This is a fork of [litebrowser](https://github.com/litehtml/litebrowser), it use
 instead of cairo_container.
 
 **Advantages:**
-* a bit faster (?)
+* faster rendering due to faster text width computation
 * less dependencies (depends only on litehtml)
 
 **Disadvantages:**
 * addressbar is disabled
 * doesn't support alpha channel in background colors, borders and text (because those are handled by GDI)
 * no rounded corners
-* transcription on Obama wiki is displayed with gaps
 * underline is broken under hoo-SAYN on Obama wiki

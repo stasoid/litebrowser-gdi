@@ -22,3 +22,4 @@
 
 #pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "Msimg32.lib")
+#pragma comment(lib, "gdiplus.lib")
