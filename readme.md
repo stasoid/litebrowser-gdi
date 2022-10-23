@@ -13,5 +13,3 @@ instead of cairo_container.
 * no rounded corners
 * transcription on Obama wiki is displayed with gaps
 * underline is broken under hoo-SAYN on Obama wiki
-* things become invisible during scroll, especially one-step scroll (when pushing the ^v buttons)
-

@@ -904,7 +904,7 @@ void CHTMLViewWnd::scroll_to( int new_left, int new_top )
 	bool need_redraw = false;
 	if(new_top != m_top)
 	{
-		if(std::abs(new_top - m_top) < client.height - client.height / 4 )
+/*		if(std::abs(new_top - m_top) < client.height - client.height / 4 )
 		{
 			RECT rcRedraw;
 			if(new_top > m_top)
@@ -918,7 +918,8 @@ void CHTMLViewWnd::scroll_to( int new_left, int new_top )
 				rcRedraw.right	= client.right();
 				rcRedraw.top	= client.height - lines_count;
 				rcRedraw.bottom	= client.height;
-			} else
+			}
+			else
 			{
 				int lines_count		= m_top - new_top;
 				int rgba_to_scroll	= m_dib.width() * lines_count;
@@ -986,7 +987,8 @@ void CHTMLViewWnd::scroll_to( int new_left, int new_top )
 
 			ReleaseDC(m_hWnd, hdc);
 
-		} else
+		}
+		else*/
 		{
 			need_redraw = true;
 		}

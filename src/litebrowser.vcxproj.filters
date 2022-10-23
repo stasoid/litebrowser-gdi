@@ -176,7 +176,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\libs\litehtml\include\master.css" />
+    <None Include="..\litehtml\include\master.css" />
     <None Include="html\toolbar.html" />
   </ItemGroup>
 </Project>
