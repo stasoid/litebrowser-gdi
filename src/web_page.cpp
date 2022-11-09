@@ -211,7 +211,7 @@ void web_page::on_document_loaded(LPCWSTR file, LPCWSTR encoding, LPCWSTR realUr
 		lstrcpyA(html_text, txt);
 	}
 
-	m_doc = litehtml::document::createFromString(html_text, this, m_parent->get_html_context());
+	m_doc = litehtml::document::createFromString(html_text, this);
 
 	LARGE_INTEGER freq; QueryPerformanceFrequency(&freq);
 	char buf[1024];
@@ -233,7 +233,7 @@ void web_page::on_document_error(DWORD dwError, LPCWSTR errMsg)
 		txt += errMsg_utf8;
 		txt += "</p>";
 	}
-	m_doc = litehtml::document::createFromString(txt.c_str(), this, m_parent->get_html_context());
+	m_doc = litehtml::document::createFromString(txt.c_str(), this);
 
 	PostMessage(m_parent->wnd(), WM_PAGE_LOADED, 0, 0);
 }

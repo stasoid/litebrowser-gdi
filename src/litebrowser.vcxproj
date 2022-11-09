@@ -277,7 +277,6 @@
     <ResourceCompile Include="litebrowser.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\litehtml\include\master.css" />
     <None Include="html\toolbar.html" />
   </ItemGroup>
   <ItemGroup>

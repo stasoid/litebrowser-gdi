@@ -9,7 +9,7 @@ CBrowserWnd::CBrowserWnd(HINSTANCE hInst)
 {
 	m_hInst		= hInst;
 	m_hWnd		= NULL;
-	m_view		= new CHTMLViewWnd(hInst, &m_browser_context, this);
+	m_view		= new CHTMLViewWnd(hInst, this);
 #ifndef NO_TOOLBAR
 	m_toolbar	= new CToolbarWnd(hInst, this);
 #endif
@@ -30,29 +30,6 @@ CBrowserWnd::CBrowserWnd(HINSTANCE hInst)
 		wc.lpszClassName  = BROWSERWND_CLASS;
 
 		RegisterClass(&wc);
-	}
-
-	LPSTR css = NULL;
-	HRSRC hResource = ::FindResource(m_hInst, L"master.css", L"CSS");
-	if(hResource)
-	{
-		DWORD imageSize = ::SizeofResource(m_hInst, hResource);
-		if(imageSize)
-		{
-			LPCSTR pResourceData = (LPCSTR) ::LockResource(::LoadResource(m_hInst, hResource));
-			if(pResourceData)
-			{
-				css = new CHAR[imageSize + 1];
-				lstrcpynA(css, pResourceData, imageSize);
-				css[imageSize] = 0;
-			}
-		}
-	}
-
-	if(css)
-	{
-		m_browser_context.load_master_stylesheet(css);
-		delete css;
 	}
 }
 

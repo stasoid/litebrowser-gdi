@@ -21,12 +21,12 @@
   <ItemGroup>
     <ClCompile Include="..\litehtml\src\background.cpp" />
     <ClCompile Include="..\litehtml\src\codepoint.cpp" />
-    <ClCompile Include="..\litehtml\src\context.cpp" />
     <ClCompile Include="..\litehtml\src\css_borders.cpp" />
     <ClCompile Include="..\litehtml\src\css_length.cpp" />
     <ClCompile Include="..\litehtml\src\css_properties.cpp" />
     <ClCompile Include="..\litehtml\src\css_selector.cpp" />
     <ClCompile Include="..\litehtml\src\document.cpp" />
+    <ClCompile Include="..\litehtml\src\document_container.cpp" />
     <ClCompile Include="..\litehtml\src\element.cpp" />
     <ClCompile Include="..\litehtml\src\el_anchor.cpp" />
     <ClCompile Include="..\litehtml\src\el_base.cpp" />
@@ -73,6 +73,7 @@
     <ClCompile Include="..\litehtml\src\render_inline_context.cpp" />
     <ClCompile Include="..\litehtml\src\render_item.cpp" />
     <ClCompile Include="..\litehtml\src\render_table.cpp" />
+    <ClCompile Include="..\litehtml\src\string_id.cpp" />
     <ClCompile Include="..\litehtml\src\strtod.cpp" />
     <ClCompile Include="..\litehtml\src\style.cpp" />
     <ClCompile Include="..\litehtml\src\stylesheet.cpp" />
@@ -90,6 +91,60 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\litehtml\src\gumbo\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\litehtml\include\litehtml\attributes.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\background.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\borders.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\codepoint.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_length.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_margins.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_offsets.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_position.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_properties.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_selector.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\document.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\document_container.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\element.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_anchor.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_base.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_before_after.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_body.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_break.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_cdata.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_comment.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_div.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_font.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_image.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_link.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_para.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_script.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_space.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_style.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_table.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_td.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_text.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_title.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\el_tr.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\html.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\html_tag.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\iterators.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\line_box.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\master_css.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\media_query.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\num_cvt.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\os_types.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\render_item.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\string_id.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\style.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\stylesheet.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\table.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\tstring_view.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\types.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\url.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\url_path.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\utf8_strings.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\web_color.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
