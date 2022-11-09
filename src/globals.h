@@ -4,7 +4,6 @@
 
 #define GDIPVER	0x0110
 
-#include "targetver.h"
 #include <windows.h>
 #include <mlang.h>
 #include <stdlib.h>

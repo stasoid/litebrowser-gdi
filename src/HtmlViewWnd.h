@@ -21,12 +21,10 @@ class CHTMLViewWnd
 	web_history					m_history;
 	web_page*					m_page;
 	web_page*					m_page_next;
-	CRITICAL_SECTION			m_sync;
 	simpledib::dib				m_dib;
 	CBrowserWnd*				m_parent;
 public:
 	CHTMLViewWnd(HINSTANCE	hInst, CBrowserWnd* parent);
-	virtual ~CHTMLViewWnd(void);
 
 	void				create(int x, int y, int width, int height, HWND parent);
 	void				open(LPCWSTR url, bool reload = FALSE);
@@ -36,10 +34,8 @@ public:
 	void				forward();
 
 	void				set_caption();
-	void				lock();
-	void				unlock();
-	bool				is_valid_page(bool with_lock = true);
-	web_page*			get_page(bool with_lock = true);
+	bool				is_valid_page();
+	web_page*			get_page();
 
 	void				render(BOOL calc_time = FALSE, BOOL do_redraw = TRUE, int calc_repeat = 1);
 	void				get_client_rect(litehtml::position& client) const;
@@ -72,13 +68,3 @@ protected:
 private:
 	static LRESULT	CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam);
 };
-
-inline void CHTMLViewWnd::lock()
-{
-	EnterCriticalSection(&m_sync);
-}
-
-inline void CHTMLViewWnd::unlock()
-{
-	LeaveCriticalSection(&m_sync);
-}

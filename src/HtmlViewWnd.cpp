@@ -17,8 +17,6 @@ CHTMLViewWnd::CHTMLViewWnd(HINSTANCE hInst, CBrowserWnd* parent)
 	m_page			= NULL;
 	m_page_next		= NULL;
 
-	InitializeCriticalSection(&m_sync);
-
 	WNDCLASS wc;
 	if(!GetClassInfo(m_hInst, HTMLVIEWWND_CLASS, &wc))
 	{
@@ -36,11 +34,6 @@ CHTMLViewWnd::CHTMLViewWnd(HINSTANCE hInst, CBrowserWnd* parent)
 
 		RegisterClass(&wc);
 	}
-}
-
-CHTMLViewWnd::~CHTMLViewWnd(void)
-{
-	DeleteCriticalSection(&m_sync);
 }
 
 LRESULT CALLBACK CHTMLViewWnd::WndProc( HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam )
@@ -175,9 +168,7 @@ void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 	FillRect(hdc, rcDraw, (HBRUSH)GetStockObject(WHITE_BRUSH));
 	LARGE_INTEGER __freq; QueryPerformanceFrequency(&__freq);
 
-	lock();
-
-	if (web_page* page = get_page(false))
+	if (web_page* page = get_page())
 	{
 		litehtml::position clip(rcDraw->left, rcDraw->top, rcDraw->right - rcDraw->left, rcDraw->bottom - rcDraw->top);
 //t("page->m_doc->draw",
@@ -185,8 +176,6 @@ void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 
 		page->release();
 	}
-
-	unlock();
 	
 /*	cairo_surface_t* surface = cairo_image_surface_create_for_data((unsigned char*) dib->bits(), CAIRO_FORMAT_ARGB32, dib->width(), dib->height(), dib->width() * 4);
 	cairo_t* cr = cairo_create(surface);
@@ -197,9 +186,7 @@ void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 	cairo_set_source_rgb(cr, 1, 1, 1);
 	cairo_paint(cr);
 
-	lock();
-
-	web_page* page = get_page(false);
+	web_page* page = get_page();
 
 	if(page)
 	{
@@ -210,17 +197,13 @@ void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 		page->release();
 	}
 
-	unlock();
-
 	cairo_destroy(cr);
 	cairo_surface_destroy(surface);*/
 }
 
 void CHTMLViewWnd::OnSize( int width, int height )
 {
-	lock();
-	web_page* page = get_page(false);
-	unlock();
+	web_page* page = get_page();
 
 	if(page)
 	{
@@ -255,8 +238,6 @@ void CHTMLViewWnd::open( LPCWSTR url, bool reload )
 
 	bool open_hash_only = false;
 
-	lock();
-
 	if(m_page)
 	{
 		if(m_page->m_url == s_url && !reload)
@@ -279,8 +260,6 @@ void CHTMLViewWnd::open( LPCWSTR url, bool reload )
 		m_page_next->load(s_url.c_str());
 	}
 	
-	unlock();
-
 	if(open_hash_only)
 	{
 		show_hash(hash);
@@ -769,60 +748,35 @@ void CHTMLViewWnd::get_client_rect( litehtml::position& client ) const
 	client.height	= rcClient.bottom - rcClient.top;
 }
 
-bool CHTMLViewWnd::is_valid_page(bool with_lock)
+bool CHTMLViewWnd::is_valid_page()
 {
 	bool ret_val = true;
-
-	if(with_lock)
-	{
-		lock();
-	}
-
 	if(!m_page || m_page && !m_page->m_doc)
 	{
 		ret_val = false;
 	}
-
-	if(with_lock)
-	{
-		unlock();
-	}
-
 	return ret_val;
 }
 
-web_page* CHTMLViewWnd::get_page(bool with_lock)
+web_page* CHTMLViewWnd::get_page()
 {
 	web_page* ret_val = NULL;
-	if(with_lock)
-	{
-		lock();
-	}
-	if(is_valid_page(false))
+	if(is_valid_page())
 	{
 		ret_val = m_page;
 		ret_val->add_ref();
 	}
-	if(with_lock)
-	{
-		unlock();
-	}
-
 	return ret_val;
 }
 
 void CHTMLViewWnd::OnPageReady()
 {
 	std::wstring url;
-	lock();
 	web_page* page = m_page_next;
-	unlock();
 
 	std::wstring hash;
 
 	bool is_ok = false;
-
-	lock();
 
 	if(m_page_next)
 	{
@@ -836,8 +790,6 @@ void CHTMLViewWnd::OnPageReady()
 		hash = m_page->m_hash;
 		url = m_page->m_url;
 	}
-
-	unlock();
 
 	if(is_ok)
 	{
@@ -914,100 +866,10 @@ void CHTMLViewWnd::scroll_to( int new_left, int new_top )
 	bool need_redraw = false;
 	if(new_top != m_top)
 	{
-/*		if(std::abs(new_top - m_top) < client.height - client.height / 4 )
-		{
-			RECT rcRedraw;
-			if(new_top > m_top)
-			{
-				int lines_count		= new_top - m_top;
-				int rgba_to_scroll	= m_dib.width() * lines_count;
-				int rgba_total		= m_dib.width() * client.height;
-
-				memmove( m_dib.bits(), m_dib.bits() + rgba_to_scroll, (rgba_total - rgba_to_scroll) * sizeof(RGBQUAD) );
-				rcRedraw.left	= client.left();
-				rcRedraw.right	= client.right();
-				rcRedraw.top	= client.height - lines_count;
-				rcRedraw.bottom	= client.height;
-			}
-			else
-			{
-				int lines_count		= m_top - new_top;
-				int rgba_to_scroll	= m_dib.width() * lines_count;
-				int rgba_total		= m_dib.width() * client.height;
-
-				memmove( m_dib.bits() + rgba_to_scroll, m_dib.bits(), (rgba_total - rgba_to_scroll) * sizeof(RGBQUAD) );
-				rcRedraw.left	= client.left();
-				rcRedraw.right	= client.right();
-				rcRedraw.top	= client.top();
-				rcRedraw.bottom	= lines_count;
-			}
-
-			int old_top = m_top;
-			m_top  = new_top;
-			OnPaint(&m_dib, &rcRedraw);
-
-			litehtml::position::vector fixed_boxes;
-
-			lock();
-			web_page* page = get_page(false);
-			if(page)
-			{
-				page->m_doc->get_fixed_boxes(fixed_boxes);
-				page->release();
-			}
-			unlock();
-
-			if(!fixed_boxes.empty())
-			{
-				RECT rcFixed;
-				RECT rcClient;
-				rcClient.left	= client.left();
-				rcClient.right	= client.right();
-				rcClient.top	= client.top();
-				rcClient.bottom	= client.bottom();
-
-				for(litehtml::position::vector::iterator iter = fixed_boxes.begin(); iter != fixed_boxes.end(); iter++)
-				{
-					rcRedraw.left	= iter->left();
-					rcRedraw.right	= iter->right();
-					rcRedraw.top	= iter->top();
-					rcRedraw.bottom	= iter->bottom();
-					if(IntersectRect(&rcFixed, &rcRedraw, &rcClient))
-					{
-						OnPaint(&m_dib, &rcFixed);
-					}
-
-					rcRedraw.left	= iter->left();
-					rcRedraw.right	= iter->right();
-					rcRedraw.top	= iter->top() + (old_top - m_top);
-					rcRedraw.bottom	= iter->bottom() + (old_top - m_top);
-
-					if(IntersectRect(&rcFixed, &rcRedraw, &rcClient))
-					{
-						OnPaint(&m_dib, &rcFixed);
-					}
-				}
-			}
-
-			HDC hdc = GetDC(m_hWnd);
-
-			BitBlt(hdc, client.left(), client.top(),
-				client.width,
-				client.height, m_dib, 0, 0, SRCCOPY);
-
-			ReleaseDC(m_hWnd, hdc);
-
-		}
-		else*/
-		{
-			need_redraw = true;
-		}
-
 		m_top  = new_top;
 		SetScrollPos(m_hWnd, SB_VERT, m_top, TRUE);
+		need_redraw = true;
 	}
-
-
 	if(new_left != m_left)
 	{
 		m_left  = new_left;
