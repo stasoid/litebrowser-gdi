@@ -8,7 +8,7 @@ instead of cairo_container.
 * less dependencies (depends only on litehtml)
 
 **Disadvantages:**
-* addressbar is disabled
+* no addressbar
 * doesn't support alpha channel in background colors, borders and text (because those are handled by GDI)
 * no rounded corners
 * underline is broken under hoo-SAYN on Obama wiki

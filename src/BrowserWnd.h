@@ -3,16 +3,12 @@
 #define BROWSERWND_CLASS	L"BROWSER_WINDOW"
 
 class CHTMLViewWnd;
-class CToolbarWnd;
 
 class CBrowserWnd
 {
 	HWND				m_hWnd;
 	HINSTANCE			m_hInst;
 	CHTMLViewWnd*		m_view;
-#ifndef NO_TOOLBAR
-	CToolbarWnd*		m_toolbar;
-#endif
 public:
 	CBrowserWnd(HINSTANCE hInst);
 	virtual ~CBrowserWnd(void);

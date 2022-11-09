@@ -24,9 +24,6 @@
     <ClCompile Include="litebrowser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ToolbarWnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tordexhttp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,15 +31,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="web_page.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="el_omnibox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TxThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sl_edit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\litehtml\containers\win32\win32_container.cpp">
@@ -74,9 +62,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ToolbarWnd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tordexhttp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -86,87 +71,12 @@
     <ClInclude Include="web_page.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="el_omnibox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TxThread.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sl_edit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="html\addr-center.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\addr-left.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\addr-right.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\back-active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\back-disabled.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\back-hover.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\back-normal.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\forward-active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\forward-disabled.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\forward-hover.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\forward-normal.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\home-active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\home-hover.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\home-normal.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="litebrowser.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="html\reload-active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\reload-hover.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\reload-normal.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\settings-active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\settings-hover.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\settings-normal.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="small.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="html\toolbar-bg.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -174,8 +84,5 @@
     <ResourceCompile Include="litebrowser.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="html\toolbar.html" />
   </ItemGroup>
 </Project>
