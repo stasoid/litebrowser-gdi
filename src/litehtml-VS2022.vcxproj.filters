@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\litehtml\src\background.cpp" />
+    <ClCompile Include="..\litehtml\src\codepoint.cpp" />
+    <ClCompile Include="..\litehtml\src\context.cpp" />
+    <ClCompile Include="..\litehtml\src\css_borders.cpp" />
+    <ClCompile Include="..\litehtml\src\css_length.cpp" />
+    <ClCompile Include="..\litehtml\src\css_properties.cpp" />
+    <ClCompile Include="..\litehtml\src\css_selector.cpp" />
+    <ClCompile Include="..\litehtml\src\document.cpp" />
+    <ClCompile Include="..\litehtml\src\el_anchor.cpp" />
+    <ClCompile Include="..\litehtml\src\el_base.cpp" />
+    <ClCompile Include="..\litehtml\src\el_before_after.cpp" />
+    <ClCompile Include="..\litehtml\src\el_body.cpp" />
+    <ClCompile Include="..\litehtml\src\el_break.cpp" />
+    <ClCompile Include="..\litehtml\src\el_cdata.cpp" />
+    <ClCompile Include="..\litehtml\src\el_comment.cpp" />
+    <ClCompile Include="..\litehtml\src\el_div.cpp" />
+    <ClCompile Include="..\litehtml\src\el_font.cpp" />
+    <ClCompile Include="..\litehtml\src\el_image.cpp" />
+    <ClCompile Include="..\litehtml\src\el_link.cpp" />
+    <ClCompile Include="..\litehtml\src\el_para.cpp" />
+    <ClCompile Include="..\litehtml\src\el_script.cpp" />
+    <ClCompile Include="..\litehtml\src\el_space.cpp" />
+    <ClCompile Include="..\litehtml\src\el_style.cpp" />
+    <ClCompile Include="..\litehtml\src\el_table.cpp" />
+    <ClCompile Include="..\litehtml\src\el_td.cpp" />
+    <ClCompile Include="..\litehtml\src\el_text.cpp" />
+    <ClCompile Include="..\litehtml\src\el_title.cpp" />
+    <ClCompile Include="..\litehtml\src\el_tr.cpp" />
+    <ClCompile Include="..\litehtml\src\element.cpp" />
+    <ClCompile Include="..\litehtml\src\html.cpp" />
+    <ClCompile Include="..\litehtml\src\html_tag.cpp" />
+    <ClCompile Include="..\litehtml\src\iterators.cpp" />
+    <ClCompile Include="..\litehtml\src\line_box.cpp" />
+    <ClCompile Include="..\litehtml\src\media_query.cpp" />
+    <ClCompile Include="..\litehtml\src\num_cvt.cpp" />
+    <ClCompile Include="..\litehtml\src\render_block.cpp" />
+    <ClCompile Include="..\litehtml\src\render_block_context.cpp" />
+    <ClCompile Include="..\litehtml\src\render_flex.cpp" />
+    <ClCompile Include="..\litehtml\src\render_image.cpp" />
+    <ClCompile Include="..\litehtml\src\render_inline.cpp" />
+    <ClCompile Include="..\litehtml\src\render_inline_context.cpp" />
+    <ClCompile Include="..\litehtml\src\render_item.cpp" />
+    <ClCompile Include="..\litehtml\src\render_table.cpp" />
+    <ClCompile Include="..\litehtml\src\strtod.cpp" />
+    <ClCompile Include="..\litehtml\src\style.cpp" />
+    <ClCompile Include="..\litehtml\src\stylesheet.cpp" />
+    <ClCompile Include="..\litehtml\src\table.cpp" />
+    <ClCompile Include="..\litehtml\src\tstring_view.cpp" />
+    <ClCompile Include="..\litehtml\src\url.cpp" />
+    <ClCompile Include="..\litehtml\src\url_path.cpp" />
+    <ClCompile Include="..\litehtml\src\utf8_strings.cpp" />
+    <ClCompile Include="..\litehtml\src\web_color.cpp" />
+    <ClCompile Include="..\litehtml\src\gumbo\attribute.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\char_ref.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\error.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\parser.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\string_buffer.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\string_piece.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\tag.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\tokenizer.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\utf8.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\util.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\vector.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="gumbo">
+      <UniqueIdentifier>{f98a2584-7817-41fa-a7f2-7cdbbb4ae2dc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\litehtml\src\gumbo\char_ref.rl">
+      <Filter>gumbo</Filter>
+    </None>
+    <None Include="..\litehtml\src\gumbo\LICENSE">
+      <Filter>gumbo</Filter>
+    </None>
+    <None Include="..\litehtml\src\gumbo\tag.in">
+      <Filter>gumbo</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\litehtml\src\gumbo\CMakeLists.txt">
+      <Filter>gumbo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

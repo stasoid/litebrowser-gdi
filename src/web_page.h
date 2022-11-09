@@ -35,15 +35,16 @@ public:
 	void get_url(std::wstring& url);
 
 	// litehtml::document_container members
-	virtual	void		set_caption(const char* caption);
-	virtual	void		set_base_url(const char* base_url);
-	virtual void		import_css(litehtml::string& text, const litehtml::string& url, litehtml::string& baseurl);
-	virtual	void		on_anchor_click(const char* url, const litehtml::element::ptr& el);
-	virtual	void		set_cursor(const char* cursor);
+	void		set_caption(const char* caption) override;
+	void		set_base_url(const char* base_url) override;
+	void		import_css(litehtml::string& text, const litehtml::string& url, litehtml::string& baseurl) override;
+	void		on_anchor_click(const char* url, const litehtml::element::ptr& el) override;
+	void		set_cursor(const char* cursor) override;
+	void		make_url(LPCWSTR url, LPCWSTR basepath, std::wstring& out) override;
+	uint_ptr	get_image(LPCWSTR url, bool redraw_on_ready) override;
+	void		get_client_rect(litehtml::position& client) const override;
 
-	virtual	void		make_url(LPCWSTR url, LPCWSTR basepath, std::wstring& out);
-	virtual uint_ptr	get_image(LPCWSTR url, bool redraw_on_ready);
-	virtual void		get_client_rect(litehtml::position& client)  const;
+	int			text_width(const char* text, uint_ptr hFont) override;
 private:
 	char*	load_text_file(LPCWSTR path, bool is_html, LPCWSTR defEncoding = L"UTF-8", LPCWSTR forceEncoding = NULL);
 	BOOL	download_and_wait(LPCWSTR url);

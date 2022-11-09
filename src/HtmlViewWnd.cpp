@@ -161,17 +161,28 @@ void CHTMLViewWnd::OnCreate()
 
 }
 
+static LARGE_INTEGER __start, __end;
+static char buf[1024];
+#define t(name, stuff)\
+	QueryPerformanceCounter(&__start);\
+	stuff;\
+	QueryPerformanceCounter(&__end);\
+	t_snprintf(buf, 1024, "%s: %Id mks\n", name, (__end.QuadPart - __start.QuadPart) * 1'000'000 / __freq.QuadPart);\
+	OutputDebugStringA(buf);
+
 void CHTMLViewWnd::OnPaint( simpledib::dib* dib, LPRECT rcDraw )
 {
 	HDC hdc = *dib;
 	FillRect(hdc, rcDraw, (HBRUSH)GetStockObject(WHITE_BRUSH));
+	LARGE_INTEGER __freq; QueryPerformanceFrequency(&__freq);
 
 	lock();
 
 	if (web_page* page = get_page(false))
 	{
 		litehtml::position clip(rcDraw->left, rcDraw->top, rcDraw->right - rcDraw->left, rcDraw->bottom - rcDraw->top);
-		page->m_doc->draw((litehtml::uint_ptr)hdc, -m_left, -m_top, &clip);
+//t("page->m_doc->draw",
+		page->m_doc->draw((litehtml::uint_ptr)hdc, -m_left, -m_top, &clip);//)
 
 		page->release();
 	}

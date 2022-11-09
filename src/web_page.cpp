@@ -2,6 +2,16 @@
 #include "web_page.h"
 #include "HtmlViewWnd.h"
 
+__int64 text_width_time = 0;
+int web_page::text_width(const char* text, uint_ptr hFont)
+{
+	LARGE_INTEGER start; QueryPerformanceCounter(&start);
+	int ret = win32_container::text_width(text, hFont);
+	LARGE_INTEGER end; QueryPerformanceCounter(&end); text_width_time += end.QuadPart - start.QuadPart;
+	return ret;
+}
+
+
 web_page::web_page(CHTMLViewWnd* parent)
 {
 	m_refCount		= 1;
@@ -202,6 +212,12 @@ void web_page::on_document_loaded(LPCWSTR file, LPCWSTR encoding, LPCWSTR realUr
 	}
 
 	m_doc = litehtml::document::createFromString(html_text, this, m_parent->get_html_context());
+
+	LARGE_INTEGER freq; QueryPerformanceFrequency(&freq);
+	char buf[1024];
+	t_snprintf(buf, 1024, ">> win32_container::text_width aggregate time: %Id ms\n", text_width_time * 1000 / freq.QuadPart);
+	OutputDebugStringA(buf);
+
 	delete html_text;
 
 	PostMessage(m_parent->wnd(), WM_PAGE_LOADED, 0, 0);
