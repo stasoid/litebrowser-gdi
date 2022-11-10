@@ -23,7 +23,6 @@ namespace tordex
 		ULONG64				m_downloaded_length;
 		DWORD				m_status;
 		std::wstring		m_url;
-		LONG				m_refCount;
 	public:
 		http_request();
 		virtual ~http_request();
@@ -36,8 +35,6 @@ namespace tordex
 		void	cancel();
 		ULONG64	get_content_length();
 		DWORD	get_status_code();
-		void	add_ref();
-		void	release();
 
 	protected:
 		DWORD	onSendRequestComplete();

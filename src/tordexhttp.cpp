@@ -106,19 +106,14 @@ BOOL tordex::http::download_file( LPCWSTR url, http_request* request )
 
 void tordex::http::remove_request( http_request* request )
 {
-	bool is_ok = false;
 	for(http_request::vector::iterator i = m_requests.begin(); i != m_requests.end(); i++)
 	{
 		if((*i) == request)
 		{
 			m_requests.erase(i);
-			is_ok = true;
-			break;
+			delete request;
+			return;
 		}
-	}
-	if(is_ok)
-	{
-		request->release();
 	}
 }
 
@@ -139,7 +134,6 @@ tordex::http_request::http_request()
 	m_error				= 0;
 	m_downloaded_length	= 0;
 	m_content_length	= 0;
-	m_refCount			= 1;
 	m_hConnection		= NULL;
 	m_hRequest			= NULL;
 	m_http				= NULL;
@@ -320,21 +314,6 @@ DWORD tordex::http_request::onReadComplete(DWORD len)
 	}
 
 	return dwError;
-}
-
-void tordex::http_request::add_ref()
-{
-	InterlockedIncrement(&m_refCount);
-}
-
-void tordex::http_request::release()
-{
-	LONG lRefCount;
-	lRefCount = InterlockedDecrement(&m_refCount);
-	if (lRefCount == 0)
-	{
-		delete this;
-	}
 }
 
 void tordex::http_request::set_parent( http* parent )
