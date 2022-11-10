@@ -16,7 +16,6 @@ namespace tordex
 	protected:
 		HINTERNET			m_hConnection;
 		HINTERNET			m_hRequest;
-		CRITICAL_SECTION	m_sync;
 		http*				m_http;
 		BYTE				m_buffer[8192];
 		DWORD				m_error;
@@ -35,8 +34,6 @@ namespace tordex
 
 		BOOL	create(LPCWSTR url, HINTERNET hSession);
 		void	cancel();
-		void	lock();
-		void	unlock();
 		ULONG64	get_content_length();
 		DWORD	get_status_code();
 		void	add_ref();
@@ -70,9 +67,6 @@ namespace tordex
 		void	stop();
 		void	close();
 
-		void lock();
-		void unlock();
-
 	private:
 		static VOID CALLBACK http_callback(HINTERNET hInternet, DWORD_PTR dwContext, DWORD dwInternetStatus, LPVOID lpvStatusInformation, DWORD dwStatusInformationLength);
 
@@ -85,29 +79,9 @@ namespace tordex
 		return m_status;
 	}
 
-	inline void http_request::lock()
-	{
-		EnterCriticalSection(&m_sync);
-	}
-
-	inline void http_request::unlock()
-	{
-		LeaveCriticalSection(&m_sync);
-	}
-
 	inline ULONG64	http_request::get_content_length()
 	{
 		return m_content_length;
-	}
-
-	inline void http::lock()
-	{
-		EnterCriticalSection(&m_sync);
-	}
-
-	inline void http::unlock()
-	{
-		LeaveCriticalSection(&m_sync);
 	}
 
 	inline void http::set_max_connections_per_server(DWORD max_con)

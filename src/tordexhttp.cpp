@@ -97,9 +97,7 @@ BOOL tordex::http::download_file( LPCWSTR url, http_request* request )
 		request->set_parent(this);
 		if(request->create(url, m_hSession))
 		{
-			lock();
 			m_requests.push_back(request);
-			unlock();
 			return TRUE;
 		}
 	}
@@ -109,7 +107,6 @@ BOOL tordex::http::download_file( LPCWSTR url, http_request* request )
 void tordex::http::remove_request( http_request* request )
 {
 	bool is_ok = false;
-	lock();
 	for(http_request::vector::iterator i = m_requests.begin(); i != m_requests.end(); i++)
 	{
 		if((*i) == request)
@@ -119,7 +116,6 @@ void tordex::http::remove_request( http_request* request )
 			break;
 		}
 	}
-	unlock();
 	if(is_ok)
 	{
 		request->release();
@@ -128,14 +124,10 @@ void tordex::http::remove_request( http_request* request )
 
 void tordex::http::stop()
 {
-	lock();
-
 	for(http_request::vector::iterator i = m_requests.begin(); i != m_requests.end(); i++)
 	{
 		(*i)->cancel();
 	}
-
-	unlock();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -151,13 +143,11 @@ tordex::http_request::http_request()
 	m_hConnection		= NULL;
 	m_hRequest			= NULL;
 	m_http				= NULL;
-	InitializeCriticalSection(&m_sync);
 }
 
 tordex::http_request::~http_request()
 {
 	cancel();
-	DeleteCriticalSection(&m_sync);
 }
 
 BOOL tordex::http_request::create( LPCWSTR url, HINTERNET hSession )
@@ -205,12 +195,10 @@ BOOL tordex::http_request::create( LPCWSTR url, HINTERNET hSession )
 
 	m_hRequest = WinHttpOpenRequest(m_hConnection, L"GET", path.c_str(), NULL, NULL, pwszAcceptTypes, flags);
 
-	lock();
 	if(!m_hRequest)
 	{
 		WinHttpCloseHandle(m_hConnection);
 		m_hConnection = NULL;
-		unlock();
 		return FALSE;
 	}
 
@@ -223,17 +211,13 @@ BOOL tordex::http_request::create( LPCWSTR url, HINTERNET hSession )
 		m_hRequest = NULL;
 		WinHttpCloseHandle(m_hConnection);
 		m_hConnection = NULL;
-		unlock();
 		return FALSE;
 	}
-	unlock();
-
 	return TRUE;
 }
 
 void tordex::http_request::cancel()
 {
-	lock();
 	if(m_hRequest)
 	{
 		WinHttpCloseHandle(m_hRequest);
@@ -244,28 +228,21 @@ void tordex::http_request::cancel()
 		WinHttpCloseHandle(m_hConnection);
 		m_hConnection = NULL;
 	}
-	unlock();
 }
 
 DWORD tordex::http_request::onSendRequestComplete()
 {
-	lock();
 	DWORD dwError = ERROR_SUCCESS;
 
 	if(!WinHttpReceiveResponse(m_hRequest, NULL)) 
 	{
 		dwError = GetLastError();
 	}
-
-	unlock();
-
 	return dwError;
 }
 
 DWORD tordex::http_request::onHeadersAvailable()
 {
-	lock();
-
 	DWORD dwError = ERROR_SUCCESS;
 	m_status = 0;
 	DWORD StatusCodeLength = sizeof(m_status);
@@ -290,8 +267,6 @@ DWORD tordex::http_request::onHeadersAvailable()
 
 		dwError = readData();
 	}
-
-	unlock();
 
 	return dwError;
 }
@@ -336,11 +311,9 @@ DWORD tordex::http_request::onReadComplete(DWORD len)
 
 	if (len != 0)
 	{
-		lock();
 		m_downloaded_length += len;
 		OnData(m_buffer, len, m_downloaded_length, m_content_length);
 		dwError = readData();
-		unlock();
 	} else
 	{
 		cancel();
