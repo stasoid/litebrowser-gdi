@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\litehtml\src\background.cpp" />
+    <ClCompile Include="..\litehtml\src\codepoint.cpp" />
+    <ClCompile Include="..\litehtml\src\css_borders.cpp" />
+    <ClCompile Include="..\litehtml\src\css_length.cpp" />
+    <ClCompile Include="..\litehtml\src\css_selector.cpp" />
+    <ClCompile Include="..\litehtml\src\html.cpp" />
+    <ClCompile Include="..\litehtml\src\media_query.cpp" />
+    <ClCompile Include="..\litehtml\src\num_cvt.cpp" />
+    <ClCompile Include="..\litehtml\src\strtod.cpp" />
+    <ClCompile Include="..\litehtml\src\stylesheet.cpp" />
+    <ClCompile Include="..\litehtml\src\utf8_strings.cpp" />
+    <ClCompile Include="..\litehtml\src\web_color.cpp" />
+    <ClCompile Include="..\litehtml\src\document_container.cpp" />
+    <ClCompile Include="..\litehtml\src\string_id.cpp" />
+    <ClCompile Include="..\litehtml\src\gumbo\attribute.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\char_ref.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\error.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\parser.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\string_buffer.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\string_piece.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\tag.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\tokenizer.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\utf8.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\util.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\gumbo\vector.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>pch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\document.cpp">
+      <Filter>frequently used</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\element.cpp">
+      <Filter>frequently used</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\html_tag.cpp">
+      <Filter>frequently used</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_anchor.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_base.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_before_after.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_body.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_break.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_cdata.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_comment.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_div.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_font.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_image.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_link.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_para.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_script.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_space.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_style.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_table.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_td.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_text.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_title.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\el_tr.cpp">
+      <Filter>el_xxx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\url.cpp">
+      <Filter>unused</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\url_path.cpp">
+      <Filter>unused</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\tstring_view.cpp">
+      <Filter>unused</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\line_box.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\iterators.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_block.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_flex.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_block_context.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_image.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_inline.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_inline_context.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_item.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\render_table.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\table.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\style.cpp">
+      <Filter>frequently used</Filter>
+    </ClCompile>
+    <ClCompile Include="..\litehtml\src\css_properties.cpp">
+      <Filter>frequently used</Filter>
+    </ClCompile>
+    <ClCompile Include="litehtml.cpp">
+      <Filter>-----------EVERYTHING------------</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="gumbo">
+      <UniqueIdentifier>{f98a2584-7817-41fa-a7f2-7cdbbb4ae2dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{22eb4823-edeb-4dda-8cb3-eb371e869e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frequently used">
+      <UniqueIdentifier>{8ae3ab80-e559-490b-ae15-9f1565a93ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="el_xxx">
+      <UniqueIdentifier>{e3ea7801-6cce-497c-a56e-cba2b699a54b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unused">
+      <UniqueIdentifier>{a3f80b16-abce-4d1e-89f1-57dce96dc4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{d9684d64-825b-42b9-a34d-73cf00d63bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="-----------EVERYTHING------------">
+      <UniqueIdentifier>{11783c9b-4b12-471f-a4f8-e92e505eddc9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\litehtml\include\litehtml\string_id.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\background.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\borders.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\codepoint.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_length.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_margins.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_offsets.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_position.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\css_selector.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\document_container.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\html.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\master_css.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\media_query.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\num_cvt.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\os_types.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\stylesheet.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\types.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\utf8_strings.h" />
+    <ClInclude Include="..\litehtml\include\litehtml\web_color.h" />
+    <ClInclude Include="pch.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\document.h">
+      <Filter>frequently used</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\element.h">
+      <Filter>frequently used</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\html_tag.h">
+      <Filter>frequently used</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_anchor.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_base.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_before_after.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_body.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_break.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_cdata.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_comment.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_div.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_font.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_image.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_link.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_para.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_script.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_space.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_style.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_table.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_td.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_text.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_title.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\el_tr.h">
+      <Filter>el_xxx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\url_path.h">
+      <Filter>unused</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\url.h">
+      <Filter>unused</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\tstring_view.h">
+      <Filter>unused</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\line_box.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\iterators.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\render_item.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\table.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\style.h">
+      <Filter>frequently used</Filter>
+    </ClInclude>
+    <ClInclude Include="..\litehtml\include\litehtml\css_properties.h">
+      <Filter>frequently used</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

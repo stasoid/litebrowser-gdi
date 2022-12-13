@@ -2,7 +2,6 @@
 #include "HtmlViewWnd.h"
 #include "BrowserWnd.h"
 #include <WindowsX.h>
-#include <algorithm>
 #include <strsafe.h>
 
 CHTMLViewWnd::CHTMLViewWnd(HINSTANCE hInst, CBrowserWnd* parent)

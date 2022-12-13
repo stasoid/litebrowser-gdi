@@ -43,8 +43,6 @@ public:
 	void		make_url(LPCWSTR url, LPCWSTR basepath, std::wstring& out) override;
 	uint_ptr	get_image(LPCWSTR url, bool redraw_on_ready) override;
 	void		get_client_rect(litehtml::position& client) const override;
-
-	int			text_width(const char* text, uint_ptr hFont) override;
 private:
 	char*	load_text_file(LPCWSTR path, bool is_html, LPCWSTR defEncoding = L"UTF-8", LPCWSTR forceEncoding = NULL);
 	BOOL	download_and_wait(LPCWSTR url);
