@@ -171,6 +171,9 @@
     <ClCompile Include="litehtml.cpp">
       <Filter>-----------EVERYTHING------------</Filter>
     </ClCompile>
+    <ClCompile Include="gumbo.c">
+      <Filter>gumbo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="gumbo">
