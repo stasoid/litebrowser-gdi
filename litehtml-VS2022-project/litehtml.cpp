@@ -51,7 +51,7 @@
 #include "../litehtml/src/el_space.cpp"
 #include "../litehtml/src/el_title.cpp"
 
-#include "../litehtml/src/tstring_view.cpp"
-#include "../litehtml/src/codepoint.cpp"
-#include "../litehtml/src/url.cpp"
-#include "../litehtml/src/url_path.cpp"
+//#include "../litehtml/src/tstring_view.cpp"
+//#include "../litehtml/src/codepoint.cpp"
+//#include "../litehtml/src/url.cpp"
+//#include "../litehtml/src/url_path.cpp"
